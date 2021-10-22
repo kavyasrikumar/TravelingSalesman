@@ -1,19 +1,17 @@
 /**
  * <pre>
- * Name:
+ * Name: Kavya Srikumar
  * Mrs. Kankelborg
- * Period
+ * Period 3
  * Project 1 Traveling Salesman
- * Last Revised on: 
+ * Last Revised on: 10/22/21
  * </pre>
  */
-public class Tour
-{
+public class Tour {
     /** 
     * Internal Node class - you may add constructors
     */
-    private class Node
-    {
+    private class Node {
         private Point data;
         private Node next;
     }
