@@ -17,20 +17,32 @@ public class TourDriver {
             StdDraw.setXscale(0, Double.parseDouble(points[0]));
             StdDraw.setYscale(0, Double.parseDouble(points[1]));
             String nextLine = bf.readLine();
+            
             while (nextLine != null && !nextLine.equals("")) {
-                // Add your code here to parse each line of the input.
             	
-            	// create a point using the x and y coordinates in the line
-            	String[] coord = nextLine.split(" ");
-            	
-            	double x = Double.parseDouble(coord[0]);
-            	double y = Double.parseDouble(coord[1]);
-            	
-            	Point point = new Point(x, y);
-            	
+                // Trim empty spaces
+                nextLine = nextLine.trim();
+
+                double x;
+                double y;
+                
+                // create an array with the characters in the current line of the txt file
+                String[] line = nextLine.split(" ");
+
+                // assuming all lines have exactly two doubles for the coordinates
+                x = Double.parseDouble(line[0]);
+                y = Double.parseDouble(line[1]);
+
+                // create a point and insert
+                Point p = new Point (x, y);
+                // call the insertNearest method once completed
+
+                // read to next line
                 nextLine = bf.readLine();
             }
+            
             bf.close();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
