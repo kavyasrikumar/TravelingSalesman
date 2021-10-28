@@ -6,13 +6,10 @@ import java.io.FileReader;
  * Test driver for the Tour class that reads in sample input files, outputs basic metrics such as
  * length and size (number of points), and draws the resulting tour.
  */
-public class TourDriver
-{
-    public static void main(String[] args)
-    {
+public class TourDriver {
+    public static void main(String[] args) {
         Tour test = new Tour();
-        try
-        {
+        try {
             String filename = "./input/tsp1000.txt"; // Try out different sample input files!
             BufferedReader bf = new BufferedReader(new FileReader(new File(filename)));
             String scale = bf.readLine();
@@ -20,15 +17,21 @@ public class TourDriver
             StdDraw.setXscale(0, Double.parseDouble(points[0]));
             StdDraw.setYscale(0, Double.parseDouble(points[1]));
             String nextLine = bf.readLine();
-            while (nextLine != null && !nextLine.equals(""))
-            {
+            while (nextLine != null && !nextLine.equals("")) {
                 // Add your code here to parse each line of the input.
+            	
+            	// create a point using the x and y coordinates in the line
+            	String[] coord = nextLine.split(" ");
+            	
+            	double x = Double.parseDouble(coord[0]);
+            	double y = Double.parseDouble(coord[1]);
+            	
+            	Point point = new Point(x, y);
+            	
                 nextLine = bf.readLine();
             }
             bf.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

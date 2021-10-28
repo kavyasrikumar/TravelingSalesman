@@ -4,7 +4,7 @@
  * Mrs. Kankelborg
  * Period 3
  * Project 1 Traveling Salesman
- * Last Revised on: 10/22/21
+ * Last Revised on: 10/26/21
  * </pre>
  */
 public class Tour {
@@ -16,6 +16,12 @@ public class Tour {
         private Node next;
     }
     
+    private Node (Point data, Node next) {
+    	
+    	data = data;
+    	next = next;
+    }
+    
     /**
     * Required fields
     */
@@ -25,16 +31,18 @@ public class Tour {
     /**
      * Creates an empty tour.
      */
-    public Tour()
-    {
+    public Tour() {
+    	
+    	home = null;
+    	size = 0;
     }
 
     /**
      * Returns the number of points in this tour.
      */
-    public int size()
-    {
-        return 0;
+    public int size(){
+        
+    	return size;
     }
 
     /**
