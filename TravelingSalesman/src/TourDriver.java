@@ -26,7 +26,7 @@ public class TourDriver {
                 double x;
                 double y;
                 
-                // create an array with the characters in the current line of the txt file
+                // create an array with the characters in the current line of the text file
                 String[] line = nextLine.split(" ");
 
                 // assuming all lines have exactly two doubles for the coordinates
