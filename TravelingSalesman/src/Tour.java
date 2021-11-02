@@ -14,33 +14,9 @@ public class Tour {
     private class Node {
         private Point data;
         private Node next;
-        
-        public Node() {
-        	data = null;
-        	next = null;
-        }
 
         public Node (Point d, Node n) {
             data = d;
-            next = n;
-        }
-        /* because data is a point, it inherits the point methods
-        public double distanceTo(Point p) {
-            return data.distanceTo(p);
-        }*/
-        
-        /* unnecessary, can refer to .data directly
-        public Point getPoint() {
-            return data;
-        }
-           unnecessary, can refer to .next directly
-        public Node getNextNode() {
-            return next;
-        }*/
-
-        // try to move this into the heuristics, they should do all the Node moving
-        public void insertNext(Point p) {
-            Node n = new Node (p, next);
             next = n;
         }
     }
@@ -128,27 +104,73 @@ public class Tour {
     public void insertNearest(Point p) {
     	
     	Node temp = home;
-    	double smallestDistance = 1000000000000.0;
-    	Node smallest = new Node();
+    	double smallestDistance = Double.MAX_VALUE;
+    	Node smallest = null;
     	
-    	while (temp.next != null) {
+    	if ( home == null) {
     		
-    		if (p.distanceTo(temp.data) < smallestDistance ) {
-    			
-    			smallestDistance = p.distanceTo(temp.data);
-    			
-    			smallest = temp;
-    		}
+    		home = new Node (p, null);
     		
-    		temp = temp.next;
+    	} else {
+    		
+	    	while (temp != null) {
+	    		
+	    		double d = p.distanceTo(temp.data);
+	    		if ( d < smallestDistance ) {
+	    			
+	    			smallestDistance = d;
+	    			smallest = temp;
+	    		}
+	    		
+	    		temp = temp.next;
+	    	}
+	    	
+	    	Node newNode = new Node(p, smallest.next);
+	    	smallest.next = newNode;
     	}
-    	
-    	Node newNode = new Node(p, smallest.next);
-    	smallest.next = newNode;
-    	
+    	size++;
     }
 
     // Inserts p into the tour using the smallest increase heuristic.
     public void insertSmallest(Point p) {
+    	
+    	if ( home == null) {
+    		
+    		home = new Node (p, null);
+    		
+    	} else {
+    		
+    		// insert p next to each point and compute the total distance
+    		// place p next to the point where it adds the smallest distance
+    		
+    		Node temp = home;
+    		double minDist = Double.MAX_VALUE;
+    		Node minNode = null;
+    		
+    		double currentDist = length();
+    		
+    		while (temp != null) {
+    			
+    			Node nextNode = temp.next;
+    			if (nextNode == null) {
+    				nextNode = home;
+    			}
+    			
+    			double distChange = temp.data.distanceTo(p) + p.distanceTo(nextNode.data) 
+    									- temp.data.distanceTo(nextNode.data);
+    			double d = currentDist + distChange;
+    			
+    			if ( d < minDist) {
+    				minDist = d;
+    				minNode = temp;
+    			}
+    			
+    			temp = temp.next;
+    		}
+    		
+    		Node newNode = new Node (p, minNode.next);
+    		minNode.next = newNode;
+    	}
+    	size++;
     }
 }

@@ -10,7 +10,7 @@ public class TourDriver {
     public static void main(String[] args) {
         Tour test = new Tour();
         try {
-            String filename = "./input/tsp1000.txt"; // Try out different sample input files!
+            String filename = "./input/tsp10.txt"; // Try out different sample input files!
             BufferedReader bf = new BufferedReader(new FileReader(new File(filename)));
             String scale = bf.readLine();
             String[] points = scale.split(" ");
@@ -22,6 +22,7 @@ public class TourDriver {
             	
                 // Trim empty spaces
                 nextLine = nextLine.trim();
+                nextLine = nextLine.replaceAll("\\s+",  " ");
 
                 double x;
                 double y;
@@ -35,7 +36,7 @@ public class TourDriver {
 
                 // create a point and insert
                 Point p = new Point (x, y);
-                // call the insertNearest method once completed
+                // call the heuristic method
 
                 // read to next line
                 nextLine = bf.readLine();
