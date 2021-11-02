@@ -66,7 +66,12 @@ public class Tour {
 	    
 	    // traverses the linked list and adds a string representation of each Nodes' data to the result string
 	    while  (temp != null) {
-	        result += temp.data.toString() + "\n";
+	    	
+	    	if (result == null) {
+	    		result = temp.data.toString() + "\n";
+	    	} else {
+	    		result += temp.data.toString() + "\n";
+	    	}
 	        temp = temp.next;
 	    }
 	    
