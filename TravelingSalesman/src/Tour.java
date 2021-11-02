@@ -4,17 +4,19 @@
  * Mrs. Kankelborg
  * Period 3
  * Project 1 Traveling Salesman
- * Last Revised on: 10/28/21
+ * Last Revised on: 11/2/21
  * </pre>
  */
 public class Tour {
     /** 
     * Internal Node class - you may add constructors
+    * creates an object of the data type Node with two fields 
     */
     private class Node {
         private Point data;
         private Node next;
 
+        // constructor for node class assigning data to a point value d and next to a Node value n
         public Node (Point d, Node n) {
             data = d;
             next = n;
@@ -52,7 +54,6 @@ public class Tour {
             // add the distance from the last to first
             length += temp.data.distanceTo(home.data);
         }
-
         return length;
     }
 
@@ -61,7 +62,7 @@ public class Tour {
     public String toString() {
     
 	    Node temp = home;
-	    String result = "";
+	    String result = null;
 	    
 	    // traverses the linked list and adds a string representation of each Nodes' data to the result string
 	    while  (temp != null) {

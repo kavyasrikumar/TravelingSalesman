@@ -36,7 +36,8 @@ public class TourDriver {
 
                 // create a point and insert
                 Point p = new Point (x, y);
-                // call the heuristic method
+                // insertNearest(p);
+                // insertSmallest(p);
 
                 // read to next line
                 nextLine = bf.readLine();
