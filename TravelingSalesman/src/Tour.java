@@ -113,7 +113,6 @@ public class Tour {
     	// sets temp to the first node
     	// sets the smallestDistance to the largest possible value so it can be changed 
     	// to the smallest distance value accurately
-    	// the smallest node initially stores nothing (null)
     	Node temp = home;
     	double smallestDistance = Double.MAX_VALUE;
     	Node smallest = null;
@@ -124,8 +123,9 @@ public class Tour {
     		home = new Node (p, null);
     	
     	// if home has a value, calculate the distance between point p and home
-    	// if the calculated distance is smaller than the smallestDistance, set smallestDistance to the calculated distance
-    	// set temp to the node that is the smallest distance away from p to keep track of where p should be inserted
+    	// if the calculated distance is smaller than the smallestDistance, 
+    	//	set smallestDistance to the calculated distance
+    	// set temp to the node that is the smallest distance away from p
     	} else {
  
 	    	while (temp != null) {
@@ -151,7 +151,7 @@ public class Tour {
     // Inserts p into the tour using the smallest increase heuristic.
     public void insertSmallest(Point p) {
     	
-    	// if the current home is null, create a node with p as the data and that becomes the home Node
+    	// if the current home is null, create a node with p as the data
     	if ( home == null) {
     		home = new Node (p, null);
     		
@@ -166,18 +166,21 @@ public class Tour {
     		
     		double currentDist = length();
     		
-    		// as long as temp has a value...
+    		// as long as temp has a value
     		while (temp != null) {
     			
+    			// check to see if temp's next is null, and assign it back to home if it is
     			Node nextNode = temp.next;
     			if (nextNode == null) {
     				nextNode = home;
     			}
     			
+    			// calculate the change in distance if p is placed in between two points
     			double distChange = temp.data.distanceTo(p) + p.distanceTo(nextNode.data) 
     									- temp.data.distanceTo(nextNode.data);
     			double d = currentDist + distChange;
     			
+    			// if this change in distance is the smallest, place p next to that node
     			if ( d < minDist) {
     				minDist = d;
     				minNode = temp;
@@ -189,6 +192,7 @@ public class Tour {
     		Node newNode = new Node (p, minNode.next);
     		minNode.next = newNode;
     	}
+    	// increment size every time a Node is added to the list
     	size++;
     }
 }
