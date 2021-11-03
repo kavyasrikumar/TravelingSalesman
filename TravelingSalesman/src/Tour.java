@@ -60,11 +60,13 @@ public class Tour {
     // Returns a string representation of this tour.
     @Override
     public String toString() {
-    
+    	
+    	// assigns temp to the closest Node which is home
+    	// sets the results String to null (which is what it will return if home is null
 	    Node temp = home;
 	    String result = null;
 	    
-	    // traverses the linked list and adds a string representation of each Nodes' data to the result string
+	    // traverses the linked list and adds a string representation of each Nodes data to the result string
 	    while  (temp != null) {
 	    	
 	    	if (result == null) {
@@ -74,7 +76,6 @@ public class Tour {
 	    	}
 	        temp = temp.next;
 	    }
-	    
 	    return result;
     }
 
@@ -109,21 +110,28 @@ public class Tour {
     // Inserts p into the tour using the nearest neighbor heuristic.
     public void insertNearest(Point p) {
     	
+    	// sets temp to the first node
+    	// sets the smallestDistance to the largest possible value so it can be changed 
+    	// to the smallest distance value accurately
+    	// the smallest node initially stores nothing (null)
     	Node temp = home;
     	double smallestDistance = Double.MAX_VALUE;
     	Node smallest = null;
     	
+    	// if the first node is null, create a new node with the point value
+    	// this node becomes the first node in the linked list
     	if ( home == null) {
-    		
     		home = new Node (p, null);
-    		
+    	
+    	// if home has a value, calculate the distance between point p and home
+    	// if the calculated distance is smaller than the smallestDistance, set smallestDistance to the calculated distance
+    	// set temp to the node that is the smallest distance away from p to keep track of where p should be inserted
     	} else {
-    		
+ 
 	    	while (temp != null) {
 	    		
 	    		double d = p.distanceTo(temp.data);
 	    		if ( d < smallestDistance ) {
-	    			
 	    			smallestDistance = d;
 	    			smallest = temp;
 	    		}
@@ -131,17 +139,20 @@ public class Tour {
 	    		temp = temp.next;
 	    	}
 	    	
+	    	// at this point, smallest will be the Node that is the smallest distance from p
+	    	// add point p as a Node after smallest
 	    	Node newNode = new Node(p, smallest.next);
 	    	smallest.next = newNode;
     	}
+    	// increment size every time a new node is added
     	size++;
     }
 
     // Inserts p into the tour using the smallest increase heuristic.
     public void insertSmallest(Point p) {
     	
+    	// if the current home is null, create a node with p as the data and that becomes the home Node
     	if ( home == null) {
-    		
     		home = new Node (p, null);
     		
     	} else {
@@ -155,6 +166,7 @@ public class Tour {
     		
     		double currentDist = length();
     		
+    		// as long as temp has a value...
     		while (temp != null) {
     			
     			Node nextNode = temp.next;
